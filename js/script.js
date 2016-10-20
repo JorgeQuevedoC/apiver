@@ -4,14 +4,21 @@ function HazQuery(){
 	if(evento === "Diámetro"){
 		$('#diam').show();
 		$('#bHolderDiam').show();
+		$('#bHolderFecha').hide();
+		$('#fecha').hide();
+		$('#tabla').hide();
 	}
 	else if(evento === "Fecha"){
-		var string = "<h1> AhorljkadHola </h1>";
-		$('#solicitud').html(string);
+		$('#diam').hide();
+		$('#bHolderDiam').hide();
+		$('#bHolderFecha').show();
+		$('#fecha').show();
+		$('#tabla').hide();
 	}
 }
 
 function BuscaDiametro(){
+	$('#tabla').show();
 	var diam = document.getElementById('diametroin').value;
 	console.log(diam);
 
@@ -29,16 +36,6 @@ function BuscaDiametro(){
 	)
 }
 
-function BuscaCantidad(){
-	$.ajax({
-	dataType: "json",
-	url: "getCantidad.php",
-	type: "GET",
-	cache: false,
-	success: function(output_string){
-			console.log(output_string);
- 			$('#tabla').html(output_string);
- 	    	}
- 		}
-	)
+function BuscaFecha(){
+
 }

@@ -139,6 +139,17 @@
 				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
 			</div>
 
+			<div class="form-group" style="display: none" id="fecha">
+			    <label for="pfecha">Primera Fecha</label>
+			    <input type="text" class="form-control" id="iniciofechain" name="iniciofechain">
+			    <label for="ffecha">Segunda Fecha</label>
+			    <input type="text" class="form-control" id="finalfechain" name="finalfechain">
+			</div>
+
+			<div id="bHolderFecha" style="display: none">
+				<input type='button' id='submitFecha' value='Buscar por Fecha'/>
+			</div>
+
 			<div id="tabla"></div>
 
 		</div>
@@ -171,6 +182,11 @@
 	<script>
 		$('#submitDiam').click(function(){
 			BuscaDiametro();
+		})
+	</script>
+	<script>
+		$('#submitFecha').click(function(){
+			BuscaFecha();
 		})
 	</script>
 	</body>
