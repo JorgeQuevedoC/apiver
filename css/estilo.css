@@ -72,6 +72,11 @@ div#main-content{
 #main-content p{
 	margin-top: 20px;
 }
+fieldset{
+	margin: auto;
+	text-align: center;
+	font-size: 16px;
+}
 /*END MAIN CONTENT*/
 
 /*FOOTER*/

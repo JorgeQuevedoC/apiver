@@ -1,3 +1,30 @@
+<?php 
+	include 'database.php';
+
+
+            $diametro=array();
+            $cantidad= array();
+            $fecha= array();
+            $contadorQ = 0;
+            $contadorP=0;
+
+            
+              $pdo = Database::connect();
+              $sql = 'SELECT * FROM reportes';
+              
+              foreach ($pdo->query($sql) as $row) {
+		  		$diametro[$contadorQ]=$row['diametro'];
+                $cantidad[$contadorQ]=$row['cantidad'];
+                $fecha[$contadorQ]=$row['fecha'];     
+
+                $contadorQ=$contadorQ+1;
+              }
+
+              Database::disconnect();
+//--------------------____------------------------------------------------------------------------------------
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +35,10 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/estilo.css">
+
+	<script src="js/jquery-2.2.4.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
 
 </head>
 <body>
@@ -35,11 +66,11 @@
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html" class="highlight">
+	       					<a href="registro.php">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
-	       					<a href="reportes.php">
+	       					<a href="reportes.html" class="highlight">
 	       						<br class="hidden-xs">Reportes</a>
 	       				</li>
 	   				</ul>
@@ -64,26 +95,54 @@
 		</div>
 	</div>
 
-	<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
-		<div class="row">
-			<form class="form-inline" action="alta2.php" method="post">
+	<section id="main-content">
+		<div class="container">
+			<table style="width:95%">
+								  <tr bgcolor="#E6E6FA">
+								    <td>Diámetro</td>
+								    <td>Cantidad</td>
+								    <td>Fecha</td>
+								  </tr>
+					<?php 
+						foreach ($diametro as $valor) {
+					?>
+								  <tr>
+								    <td><?php echo ($diametro[$contadorP]) ?></td>
+								    <td><?php echo ($cantidad[$contadorP]) ?></td>
+								    <td><?php echo ($fecha[$contadorP]) ?></td>							   
+								  </tr>		
+								  
+								
+					<?php	
+						$contadorP = $contadorP+1;						
+						}
+					?>
+			</table> 
+			<fieldset>
+    			<label for="Evento">Selecciona el tipo de búsqueda: </label>
+				    <select name="evento" id="evento">
+				     	<option>Diámetro</option>
+				     	<option>Fecha</option>
+				    </select>
+			</fieldset>
 
-			  <div class="form-group">
-			    <label for="cantidad">Cantidad</label>
-			    <input type="text" class="form-control" id="cantidad" name="cantidad" placeholder="15">
-			  </div>
-			
-			  <div class="form-group">
+			<div id="bHolder">		
+				<input type="button" id="submit" value="Genera Formato"/>
+			</div>
+
+			<div class="form-group" style="display: none" id="diam">
 			    <label for="diametro">Diámetro (cm)</label>
-			    <input type="text" class="form-control" id="diametro" name="diametro" placeholder="40">
-			  </div>
-			
-			  <button type="submit" class="btn btn-primary">Agregar</button>
-			
-			</form>
-		</div>
-	</div>
+			    <input type="text" class="form-control" id="diametroin" name="diametroin">
+			</div>
 
+			<div id="bHolderDiam" style="display: none">
+				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
+			</div>
+
+			<div id="tabla"></div>
+
+		</div>
+	</section>
 
 	<footer class="pannel-footer">
 		<div class="container" id="bottom">
@@ -104,8 +163,15 @@
 	    </div>
 	</footer>
 
-	<script src="js/jquery-2.2.4.min.js"></script>
-  	<script src="js/bootstrap.min.js"></script>
-  	<script src="js/script.js"</script>
-</body>
+	<script>
+  		$('#submit').click(function(){
+			HazQuery();
+		});
+	</script>
+	<script>
+		$('#submitDiam').click(function(){
+			BuscaDiametro();
+		})
+	</script>
+	</body>
 </html>
