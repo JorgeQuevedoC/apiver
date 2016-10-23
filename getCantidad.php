@@ -5,9 +5,12 @@
 
 	$val = 0;
 
-	$res = mysql_query("SELECT cantidad FROM reportes");
+	$res = mysql_query("SELECT cantidad, proceso FROM reportes");
 	while($row = mysql_fetch_array($res)){
-		$val += $row['cantidad'];
+		if($row['proceso'] === "entrada")
+			$val += $row['cantidad'];
+		else
+			$val -= $row['cantidad'];
 	}
 
 	$string = "<p>Número de Tubos en existencia: " . $val . "</p>";

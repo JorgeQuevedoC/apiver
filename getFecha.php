@@ -6,20 +6,16 @@
 	$f1 = $_GET['f1'];
 	$f2 = $_GET['f2'];
 
-	$fecha = strtotime("+1 day", strtotime($f2));
-	$fecha = date("Y-m-d", $fecha);
+	$f1 = $f1 . " 00:00:00";
+	$f2 = $f2 . " 23:59:59";
 
-	$cadena = "<table style='width:95%'><tr bgcolor='#E6E6FA'><td>Diámetro</td><td>Cantidad</td><td>Fecha</td></tr>";
-
-	$query = mysql_query("SELECT diametro FROM reportes WHERE fecha BETWEEN '" . $f1 . "' AND  '" . $fecha . "'");
-
+	$query = mysql_query("select fecha, diametro, cantidad, proceso from reportes where fecha >= '$f1' and fecha <= '$f2'");
+	
 	while($row = mysql_fetch_row($query)):
 		$data[] = $row;
-		$cadena .= "<tr><td>" . $row['diametro'] ."</td><td>" . $row['cantidad'] ."</td><td>" . $row['fecha'] ."</td></tr>";
 	endwhile;
 
-	$cadena .= "</table>";
+	echo json_encode($data);	
 
-	echo json_encode($cadena);	
-
+	mysql_close($link);
 ?>

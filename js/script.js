@@ -135,8 +135,6 @@ function BuscaFecha(){
 	$('#tabla').show();
 	var f1 = document.getElementById('f1').value;
 	var f2 = document.getElementById('f2').value;
-	console.log(f1);
-	console.log(f2);
 
 	$.ajax({
 	dataType: "json",
@@ -144,10 +142,35 @@ function BuscaFecha(){
 	data: {'f1': f1, 'f2': f2},
 	type: "GET",
 	cache: false,
-	success: function(output_string){
-			console.log(output_string);
- 			$('#tabla').html(output_string);
- 	    	}
  		}
 	)
+
+	.done(function(json,b,c) {
+		console.log("success");
+		console.log(json);
+
+		var $select = $('#tabla');
+
+		$cadena = '';
+		$select.html('');
+
+		var i = 0;
+
+		$cadena += '<div class="container id="datos"><table style="width:95%"><tr bgcolor="#E6E6FA"><td>Diámetro</td><td>Cantidad</td><td>Fecha</td><td>Proceso</td></tr>';
+
+		while(json[i] != null){
+		$cadena += '<tr btcolor = "#F5F5FF"><td>' + json[i][1] + '</td><td>' + json[i][2] + '</td><td>' + json[i][0] + '</td><td>' + json[i][3] + "</td></tr>";
+		i++;
+
+		}	
+
+		$cadena += '</table></div>';
+		
+		$select.append($cadena);
+    })
+
+	.error(function(a,b,c) {
+		console.warn(a.responseText)
+		}
+	);	    	
 }
