@@ -5,6 +5,7 @@
             $diametro=array();
             $cantidad= array();
             $fecha= array();
+            $proceso= array();
             $contadorQ = 0;
             $contadorP=0;
 
@@ -16,6 +17,7 @@
 		  		$diametro[$contadorQ]=$row['diametro'];
                 $cantidad[$contadorQ]=$row['cantidad'];
                 $fecha[$contadorQ]=$row['fecha'];     
+                $proceso[$contadorQ]=$row['proceso']; 
 
                 $contadorQ=$contadorQ+1;
               }
@@ -102,6 +104,7 @@
 								    <td>Diámetro</td>
 								    <td>Cantidad</td>
 								    <td>Fecha</td>
+								    <td>Proceso</td>
 								  </tr>
 					<?php 
 						foreach ($diametro as $valor) {
@@ -109,7 +112,8 @@
 								  <tr>
 								    <td><?php echo ($diametro[$contadorP]) ?></td>
 								    <td><?php echo ($cantidad[$contadorP]) ?></td>
-								    <td><?php echo ($fecha[$contadorP]) ?></td>							   
+								    <td><?php echo ($fecha[$contadorP]) ?></td>		
+								    <td><?php echo ($proceso[$contadorP]) ?></td>							   
 								  </tr>		
 								  
 								

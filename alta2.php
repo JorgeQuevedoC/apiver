@@ -6,7 +6,8 @@
 
 		// keep track post values
 		$cantidad = $_POST['cantidad'];	
-		$diametro = $_POST['diametro'];	
+		$diametro = $_POST['diametro'];
+		$proceso = $_POST['proceso'];	
 
 		
 		$pdo = Database::connect();
@@ -14,9 +15,9 @@
 				try
 				{
 					$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$sql = "INSERT INTO reportes (id,cantidad,diametro) values(0,?,?)";				
+					$sql = "INSERT INTO reportes (id,cantidad,diametro,proceso) values(0,?,?,?)";				
 					$q = $pdo->prepare($sql);
-					$q->execute(array($cantidad,$diametro));
+					$q->execute(array($cantidad,$diametro,$proceso));
 
 				}
 				catch(Exception $e)
