@@ -1,6 +1,10 @@
 <?php 
+	session_start();
+
 	include 'database.php';
 
+	if (!isset($_SESSION["validated"]))
+  		header('Location: login.php');
 
             $diametro=array();
             $cantidad= array();
@@ -64,7 +68,7 @@
 	      		<div id="collapsable-nav" class="collapse navbar-collapse"> 
 	      			<ul id="nav-list" class="text-center nav navbar-nav navbar-right">
 	        			<li>
-	        				<a href="index.html">
+	        				<a href="index.php">
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
