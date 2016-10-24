@@ -5,6 +5,7 @@
             $diametro=array();
             $cantidad= array();
             $fecha= array();
+            $proceso= array();
             $contadorQ = 0;
             $contadorP=0;
 
@@ -16,6 +17,7 @@
 		  		$diametro[$contadorQ]=$row['diametro'];
                 $cantidad[$contadorQ]=$row['cantidad'];
                 $fecha[$contadorQ]=$row['fecha'];     
+                $proceso[$contadorQ]=$row['proceso']; 
 
                 $contadorQ=$contadorQ+1;
               }
@@ -102,6 +104,7 @@
 								    <td>Diámetro</td>
 								    <td>Cantidad</td>
 								    <td>Fecha</td>
+								    <td>Proceso</td>
 								  </tr>
 					<?php 
 						foreach ($diametro as $valor) {
@@ -109,7 +112,8 @@
 								  <tr>
 								    <td><?php echo ($diametro[$contadorP]) ?></td>
 								    <td><?php echo ($cantidad[$contadorP]) ?></td>
-								    <td><?php echo ($fecha[$contadorP]) ?></td>							   
+								    <td><?php echo ($fecha[$contadorP]) ?></td>		
+								    <td><?php echo ($proceso[$contadorP]) ?></td>							   
 								  </tr>		
 								  
 								
@@ -122,28 +126,45 @@
     			<label for="Evento">Selecciona el tipo de búsqueda: </label>
 				    <select name="evento" id="evento">
 				     	<option>Diámetro</option>
+				     	<option>Cantidad de Tubos</option>
 				     	<option>Fecha</option>
 				    </select>
 			</fieldset>
 
 			<div id="bHolder">		
-				<input type="button" id="submit" value="Genera Formato"/>
+				<input type="button" id="submit" value="Iniciar Búsqueda"/>
 			</div>
 
-			<div class="form-group" style="display: none" id="diam">
-			    <label for="diametro">Diámetro (cm)</label>
-			    <input type="text" class="form-control" id="diametroin" name="diametroin">
-			</div>
+			<fieldset id="diam" style="display: none">
+				<script type='text/javascript'>
+					getDiametro();
+				</script>
+    			<label for="Evento">Selecciona el Tamaño (en cm.)</label>
+			    <select name="diametro" id="diametro">
+
+			    </select>
+			</fieldset>
 
 			<div id="bHolderDiam" style="display: none">
 				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
 			</div>
 
 			<div class="form-group" style="display: none" id="fecha">
-			    <label for="pfecha">Primera Fecha</label>
-			    <input type="text" class="form-control" id="iniciofechain" name="iniciofechain">
-			    <label for="ffecha">Segunda Fecha</label>
-			    <input type="text" class="form-control" id="finalfechain" name="finalfechain">
+			    <fieldset id="diam">
+					<script type='text/javascript'>
+						getFecha();
+					</script>
+	    			<label for="Evento">De: </label>
+				    <select name="f1" id="f1">
+
+				    </select>
+				</fieldset>
+			    <fieldset id="diam">
+	    			<label for="Evento">Hasta: </label>
+				    <select name="f2" id="f2">
+
+				    </select>
+				</fieldset>
 			</div>
 
 			<div id="bHolderFecha" style="display: none">
