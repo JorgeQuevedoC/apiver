@@ -43,12 +43,20 @@
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html">
+	       					<a href="registro.php">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
 	       					<a href="reportes.php">
 	       						<br class="hidden-xs">Reportes</a>
+	       				</li>
+	       				<li>
+	       					<a href="tubos.php">
+	       						<br class="hidden-xs">Tubos</a>
+	       				</li>
+	       				<li>
+	       					<a href="explanadas.php">
+	       						<br class="hidden-xs">Explanadas</a>
 	       				</li>
 	   				</ul>
 	   			</div> 

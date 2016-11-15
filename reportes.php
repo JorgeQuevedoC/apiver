@@ -10,18 +10,20 @@
             $cantidad= array();
             $fecha= array();
             $proceso= array();
+            $explanada =array();
             $contadorQ = 0;
             $contadorP=0;
 
             
               $pdo = Database::connect();
-              $sql = 'SELECT * FROM reportes';
+              $sql = 'SELECT reportes.cantidad, reportes.fecha, reportes.proceso, tubos.diametro, explanadas.nombre FROM reportes INNER JOIN tubos ON reportes.diametro=tubos.id INNER JOIN explanadas ON reportes.explanada=explanadas.id ORDER BY reportes.fecha';
               
               foreach ($pdo->query($sql) as $row) {
 		  		$diametro[$contadorQ]=$row['diametro'];
                 $cantidad[$contadorQ]=$row['cantidad'];
                 $fecha[$contadorQ]=$row['fecha'];     
-                $proceso[$contadorQ]=$row['proceso']; 
+                $proceso[$contadorQ]=$row['proceso'];
+                $explanada[$contadorQ]=$row['nombre']; 
 
                 $contadorQ=$contadorQ+1;
               }
@@ -72,7 +74,7 @@
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html">
+	       					<a href="registro.php">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
@@ -109,6 +111,7 @@
 								    <td>Cantidad</td>
 								    <td>Fecha</td>
 								    <td>Proceso</td>
+								    <td>Explanada</td>
 								  </tr>
 					<?php 
 						foreach ($diametro as $valor) {
@@ -117,7 +120,8 @@
 								    <td><?php echo ($diametro[$contadorP]) ?></td>
 								    <td><?php echo ($cantidad[$contadorP]) ?></td>
 								    <td><?php echo ($fecha[$contadorP]) ?></td>		
-								    <td><?php echo ($proceso[$contadorP]) ?></td>							   
+								    <td><?php echo ($proceso[$contadorP]) ?></td>
+								    <td><?php echo ($explanada[$contadorP]) ?></td>							   
 								  </tr>		
 								  
 								
@@ -132,6 +136,7 @@
 				     	<option>Diámetro</option>
 				     	<option>Cantidad de Tubos</option>
 				     	<option>Fecha</option>
+				     	<option>Explanada</option>
 				    </select>
 			</fieldset>
 
@@ -153,8 +158,9 @@
 				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
 			</div>
 
-			<div class="form-group" style="display: none" id="fecha">
-			    <fieldset id="diam">
+			<div class="form-group" style="display: none; text-align: center;" id="fecha">
+			    
+			    <fieldset id="diam" style="display: inline !important;">
 					<script type='text/javascript'>
 						getFecha();
 					</script>
@@ -163,12 +169,14 @@
 
 				    </select>
 				</fieldset>
-			    <fieldset id="diam">
+
+			    <fieldset id="diam" style="display: inline !important;">
 	    			<label for="Evento">Hasta: </label>
 				    <select name="f2" id="f2">
 
 				    </select>
 				</fieldset>
+
 			</div>
 
 			<div id="bHolderFecha" style="display: none">

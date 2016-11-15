@@ -35,7 +35,7 @@
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html" class="highlight">
+	       					<a href="registro.php" class="highlight">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
@@ -75,7 +75,31 @@
 			
 			  <div class="form-group">
 			    <label for="diametro">Diámetro (cm)</label>
-			    <input type="text" class="form-control" id="diametro" name="diametro" placeholder="40">
+			    <select class="form-control"  name ="diametro" id="diametro">
+                        <?php
+                        	require 'database.php';
+							$pdo = Database::connect();
+					   		$query = 'SELECT * FROM tubos';
+	 				   		foreach ($pdo->query($query) as $row) {
+       	   						echo "<option value='" . $row['id'] . "'>" . $row['diametro'] . "</option>";
+					   		}
+					   		Database::disconnect();
+						?>                                
+                </select>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="explanada">Explanada</label>
+			    <select class="form-control"  name ="explanada" id="explanada">
+                        <?php                     
+							$pdo2 = Database::connect();
+					   		$query2 = 'SELECT * FROM explanadas';
+	 				   		foreach ($pdo2->query($query2) as $row2) {
+       	   						echo "<option value='" . $row2['id'] . "'>" . $row2['nombre'] . "</option>";
+					   		}
+					   		Database::disconnect();
+						?>                                
+                </select>
 			  </div>
 
 			  <div class="form-group">
