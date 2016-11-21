@@ -24,8 +24,13 @@
 			<div class="container">
 				<div class="navbar-header"> 
 					<div class="navbar-brand pull-left">
-						<a href="index.html"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/apiverLogo.png" alt="Apiver"></a>
 					</div> 
+					<div class="navbar-brand pull-left">
+						
+					</div> 
+
 
 					
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
@@ -57,6 +62,10 @@
 	       				<li>
 	       					<a href="explanadas.php">
 	       						<br class="hidden-xs">Explanadas</a>
+	       				</li>
+	       				<li>
+	       					<a href="consulta.php">
+	       						<br class="hidden-xs">Consulta</a>
 	       				</li>
 	   				</ul>
 	   			</div> 

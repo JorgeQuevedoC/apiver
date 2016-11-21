@@ -174,3 +174,42 @@ function BuscaFecha(){
 		}
 	);	    	
 }
+
+function busqueda() {
+			  // Declare variables 
+			  //busquedaDiametro();
+			  //busquedaProceso();
+			  var input, filter, table, tr, td, i, contadorBusqueda;
+			  contadorBusqueda=0;
+			  input = document.getElementById("myInput");
+			  input2 = document.getElementById("myInput2");
+			  input3 = document.getElementById("myInput3");
+			  filter = input.value.toUpperCase();
+			  filter2 = input2.value.toUpperCase();
+			  filter3 = input3.value.toUpperCase();
+			  table = document.getElementById("myTable");
+			  tr = table.getElementsByTagName("tr");
+			  conta = document.getElementById("contador");
+
+			  console.log("Input:"+input+", Filter:"+filter+", TR:"+tr);
+
+			  // Loop through all table rows, and hide those who don't match the search query
+			  for (i = 0; i < tr.length; i++) {
+			    td = tr[i].getElementsByTagName("td")[4];
+			    td2 = tr[i].getElementsByTagName("td")[1];
+			    td3 = tr[i].getElementsByTagName("td")[3];
+
+			    if (td && td2 && td3) {
+			      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 && td2.innerHTML.toUpperCase().indexOf(filter2) > -1 && td3.innerHTML.toUpperCase().indexOf(filter3) > -1) {
+			        tr[i].style.display = "";
+			        contadorBusqueda++;
+			      } else {
+			        tr[i].style.display = "none";
+			      }
+			    } 
+			  }
+
+			  console.log("Contador Búsqueda:"+contadorBusqueda);
+			  conta.innerHTML = contadorBusqueda;
+			  
+			}
