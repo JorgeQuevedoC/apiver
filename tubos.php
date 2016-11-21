@@ -110,29 +110,46 @@
 		              <thead>
 		                <tr>		                 
 		                  <th>ID</th>
-		                  <th>Diámetro</th>                                              		                
+		                  <th>Diámetro</th>
+		                  <th> </th>                                              		                
 		                </tr>
 		              </thead>
 		              <tbody>
+
 		              <?php 
 					   include 'database.php';
 					   $pdo = Database::connect();
+
+					   $diametrosExistentes = array();
+					   $contadorDiametros = 0;
+
+					   $sql2 = 'SELECT * FROM reportes';
 					   $sql = 'SELECT * FROM tubos';
+
+					   foreach ($pdo->query($sql2) as $row2){
+					   		$diametrosExistentes[$contadorDiametros] = $row2['diametro'];
+					   		$contadorDiametros = $contadorDiametros + 1;
+					   }
+
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';							   	
     							   	echo '<td>'. $row['id'] . '</td>';
     							   	echo '<td>'. $row['diametro'] . '</td>';
-                                    echo '<td width=250 style="text-align:center;">';
-    							   	/**echo '<a class="btn" href="readTubo.php?id='.$row['id'].'">Detalles</a>';
-    							   	echo '&nbsp;';
-    							   	echo '<a class="btn btn-success" href="updateTubo.php?id='.$row['id'].'">Actualizar</a>';
-    							   	echo '&nbsp;';**/
-    							   	echo '<a class="btn btn-danger" href="deleteTubo.php?id='.$row['id'].'">Eliminar</a>';
-    							   	echo '</td>';
+
+	                                echo '<td width=250 style="text-align:center;">';
+    							   	if(!in_array($row['id'], $diametrosExistentes)){
+	    							   	echo '<a class="btn btn-danger" href="deleteTubo.php?id='.$row['id'].'">Eliminar</a>';  	
+	    							}
+	    							else{
+	    							   	echo '<a class="btn btn-danger" disabled="disabled" href="deleteTubo.php?id='.$row['id'].'">Eliminar</a>';
+	    							}
+	    							echo '</td>';
+
 							   	echo '</tr>';
 					   }
 					   Database::disconnect();
 					  ?>
+
 				      </tbody>
 	            </table>
     	</div>
