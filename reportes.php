@@ -75,7 +75,7 @@
 	      		<div id="collapsable-nav" class="collapse navbar-collapse"> 
 	      			<ul id="nav-list" class="text-center nav navbar-nav navbar-right">
 	        			<li>
-	        				<a href="index.php" class="highlight">
+	        				<a href="index.php">
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
@@ -83,7 +83,7 @@
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
-	       					<a href="reportes.php">
+	       					<a href="reportes.php" class="highlight">
 	       						<br class="hidden-xs">Reportes</a>
 	       				</li>
 	       				<li>
