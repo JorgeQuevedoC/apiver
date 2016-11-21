@@ -54,21 +54,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tenaris Tamsa</title>
 
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Tenaris Tamsa</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/estilo.css">
+	<script type="text/javascript" src="js/script.js"></script>
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/estilo.css">
-	    <link href="css/bootstrap.min.css" rel="stylesheet">
-	    <script src="js/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="js/script.js"></script>    	
-	</head>
+</head>
 
-	<body>
+<body>
 	<header>
 		<nav id="header-nav" class="navbar navbar-default"> 
 			<div class="container">
@@ -94,7 +92,7 @@
 	      		<div id="collapsable-nav" class="collapse navbar-collapse"> 
 	      			<ul id="nav-list" class="text-center nav navbar-nav navbar-right">
 	        			<li>
-	        				<a href="index.php" class="highlight">
+	        				<a href="index.php">
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
@@ -114,7 +112,7 @@
 	       						<br class="hidden-xs">Explanadas</a>
 	       				</li>
 	       				<li>
-	       					<a href="consulta.php">
+	       					<a href="consulta.php"   class="highlight">
 	       						<br class="hidden-xs">Consulta</a>
 	       				</li>
 	   				</ul>
@@ -143,7 +141,7 @@
 			<br/><br/>
 		</div>
 	    
-	    <div class="container-fluid">
+	    <div class="container">
 	    
 			<div class="span10 offset1">
 				<div class="row" style="width: 100%">
@@ -156,17 +154,14 @@
 				<div id="contador" style="display: inline;"></div>
 
 
-					<table style="width: 100%">
-					<tr style="text-align: center; vertical-align: top;">
-
-					<td>
+			
 						<table id="myTable" class="table table-striped" style="width:100%">
 						  	<tr class="header" bgcolor="#E6E6FA">
 						    	<th style="width:auto;">EXPLANADA</th>
 						    	<th style="width:auto;">DIAMETRO</th>
 						    	<th style="width:auto;">CANTIDAD</th>
 						    	<th style="width:auto;">PROCESO</th>
-						    	<th style="width: 100% !important;">FECHA</th>
+						    	<th style="width:auto">FECHA</th>
 						  	</tr>
 
 						  	<?php 
@@ -177,7 +172,7 @@
 									<td><?php echo ($diametro[$contadorP]) ?></td>
 									<td><?php echo ($cantidad[$contadorP]) ?></td>
 									<td><?php echo ($proceso[$contadorP]) ?></td> 								
-									<td style="width: 100px !important;"><?php echo ($fecha[$contadorP]) ?></td>
+									<td><?php echo ($fecha[$contadorP]) ?></td>
 								</tr>					  
 											
 							<?php	
@@ -185,12 +180,31 @@
 								}
 							?>
 						</table>
-								
-					</td>
-					</tr>
-					</table>
+
 
 			</div>
 	    </div> <!-- /container -->
-	  </body>
+	    	<footer class="pannel-footer">
+		<div class="container" id="bottom">
+		        <section id="datos" class="text-center">
+		          	<span>Copyright &copy; 2016 Tenaris Tamsa</span>
+		        </section>
+		    <div class="row">
+		        <section class="blue col-xs-4">
+			        <hr class="bl">
+			    </section>
+			    <section class="green col-xs-4">
+			        <hr class="gr">
+			    </section>
+			    <section class="purple col-xs-4">
+			        <hr class="pr">
+			    </section>
+		    </div>
+	    </div>
+	</footer>
+
+	<script src="js/jquery-2.2.4.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+
+	</body>
 </html>
