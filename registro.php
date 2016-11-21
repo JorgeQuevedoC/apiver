@@ -16,8 +16,13 @@
 			<div class="container">
 				<div class="navbar-header"> 
 					<div class="navbar-brand pull-left">
-						<a href="index.html"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/apiverLogo.png" alt="Apiver"></a>
 					</div> 
+					<div class="navbar-brand pull-left">
+						
+					</div> 
+
 
 					
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
@@ -31,16 +36,28 @@
 	      		<div id="collapsable-nav" class="collapse navbar-collapse"> 
 	      			<ul id="nav-list" class="text-center nav navbar-nav navbar-right">
 	        			<li>
-	        				<a href="index.php">
+	        				<a href="index.php" class="highlight">
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html" class="highlight">
+	       					<a href="registro.php">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
 	       					<a href="reportes.php">
 	       						<br class="hidden-xs">Reportes</a>
+	       				</li>
+	       				<li>
+	       					<a href="tubos.php">
+	       						<br class="hidden-xs">Tubos</a>
+	       				</li>
+	       				<li>
+	       					<a href="explanadas.php">
+	       						<br class="hidden-xs">Explanadas</a>
+	       				</li>
+	       				<li>
+	       					<a href="consulta.php">
+	       						<br class="hidden-xs">Consulta</a>
 	       				</li>
 	   				</ul>
 	   			</div> 
@@ -75,7 +92,31 @@
 			
 			  <div class="form-group">
 			    <label for="diametro">Diámetro (cm)</label>
-			    <input type="text" class="form-control" id="diametro" name="diametro" placeholder="40">
+			    <select class="form-control"  name ="diametro" id="diametro">
+                        <?php
+                        	require 'database.php';
+							$pdo = Database::connect();
+					   		$query = 'SELECT * FROM tubos';
+	 				   		foreach ($pdo->query($query) as $row) {
+       	   						echo "<option value='" . $row['id'] . "'>" . $row['diametro'] . "</option>";
+					   		}
+					   		Database::disconnect();
+						?>                                
+                </select>
+			  </div>
+
+			  <div class="form-group">
+			    <label for="explanada">Explanada</label>
+			    <select class="form-control"  name ="explanada" id="explanada">
+                        <?php                     
+							$pdo2 = Database::connect();
+					   		$query2 = 'SELECT * FROM explanadas';
+	 				   		foreach ($pdo2->query($query2) as $row2) {
+       	   						echo "<option value='" . $row2['id'] . "'>" . $row2['nombre'] . "</option>";
+					   		}
+					   		Database::disconnect();
+						?>                                
+                </select>
 			  </div>
 
 			  <div class="form-group">

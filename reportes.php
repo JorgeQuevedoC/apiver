@@ -10,18 +10,20 @@
             $cantidad= array();
             $fecha= array();
             $proceso= array();
+            $explanada =array();
             $contadorQ = 0;
             $contadorP=0;
 
             
               $pdo = Database::connect();
-              $sql = 'SELECT * FROM reportes';
+              $sql = 'SELECT reportes.cantidad, reportes.fecha, reportes.proceso, tubos.diametro, explanadas.nombre FROM reportes INNER JOIN tubos ON reportes.diametro=tubos.id INNER JOIN explanadas ON reportes.explanada=explanadas.id ORDER BY reportes.fecha';
               
               foreach ($pdo->query($sql) as $row) {
 		  		$diametro[$contadorQ]=$row['diametro'];
                 $cantidad[$contadorQ]=$row['cantidad'];
                 $fecha[$contadorQ]=$row['fecha'];     
-                $proceso[$contadorQ]=$row['proceso']; 
+                $proceso[$contadorQ]=$row['proceso'];
+                $explanada[$contadorQ]=$row['nombre']; 
 
                 $contadorQ=$contadorQ+1;
               }
@@ -53,8 +55,13 @@
 			<div class="container">
 				<div class="navbar-header"> 
 					<div class="navbar-brand pull-left">
-						<a href="index.html"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
+						<a href="index.php"><img src="Img/apiverLogo.png" alt="Apiver"></a>
 					</div> 
+					<div class="navbar-brand pull-left">
+						
+					</div> 
+
 
 					
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
@@ -68,16 +75,28 @@
 	      		<div id="collapsable-nav" class="collapse navbar-collapse"> 
 	      			<ul id="nav-list" class="text-center nav navbar-nav navbar-right">
 	        			<li>
-	        				<a href="index.php">
+	        				<a href="index.php" class="highlight">
 	        					<br class="hidden-xs">Inicio</a>
 	        			</li>
 	        			<li>
-	       					<a href="registro.html">
+	       					<a href="registro.php">
 	       						<br class="hidden-xs">Registro</a>
 	       				</li>
 	       				<li>
-	       					<a href="reportes.php" class="highlight">
+	       					<a href="reportes.php">
 	       						<br class="hidden-xs">Reportes</a>
+	       				</li>
+	       				<li>
+	       					<a href="tubos.php">
+	       						<br class="hidden-xs">Tubos</a>
+	       				</li>
+	       				<li>
+	       					<a href="explanadas.php">
+	       						<br class="hidden-xs">Explanadas</a>
+	       				</li>
+	       				<li>
+	       					<a href="consulta.php">
+	       						<br class="hidden-xs">Consulta</a>
 	       				</li>
 	   				</ul>
 	   			</div> 
@@ -109,6 +128,7 @@
 								    <td>Cantidad</td>
 								    <td>Fecha</td>
 								    <td>Proceso</td>
+								    <td>Explanada</td>
 								  </tr>
 					<?php 
 						foreach ($diametro as $valor) {
@@ -117,7 +137,8 @@
 								    <td><?php echo ($diametro[$contadorP]) ?></td>
 								    <td><?php echo ($cantidad[$contadorP]) ?></td>
 								    <td><?php echo ($fecha[$contadorP]) ?></td>		
-								    <td><?php echo ($proceso[$contadorP]) ?></td>							   
+								    <td><?php echo ($proceso[$contadorP]) ?></td>
+								    <td><?php echo ($explanada[$contadorP]) ?></td>							   
 								  </tr>		
 								  
 								
@@ -132,6 +153,7 @@
 				     	<option>Diámetro</option>
 				     	<option>Cantidad de Tubos</option>
 				     	<option>Fecha</option>
+				     	<option>Explanada</option>
 				    </select>
 			</fieldset>
 
@@ -153,8 +175,9 @@
 				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
 			</div>
 
-			<div class="form-group" style="display: none" id="fecha">
-			    <fieldset id="diam">
+			<div class="form-group" style="display: none; text-align: center;" id="fecha">
+			    
+			    <fieldset id="diam" style="display: inline !important;">
 					<script type='text/javascript'>
 						getFecha();
 					</script>
@@ -163,12 +186,14 @@
 
 				    </select>
 				</fieldset>
-			    <fieldset id="diam">
+
+			    <fieldset id="diam" style="display: inline !important;">
 	    			<label for="Evento">Hasta: </label>
 				    <select name="f2" id="f2">
 
 				    </select>
 				</fieldset>
+
 			</div>
 
 			<div id="bHolderFecha" style="display: none">
