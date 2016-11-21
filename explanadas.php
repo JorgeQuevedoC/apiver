@@ -109,26 +109,47 @@
 		                </tr>
 		              </thead>
 		              <tbody>
+
+
+
+
 		              <?php 
 					   include 'database.php';
+
+					   $explanadasUsadas = array();
+					   $numExplanadas = 0;
+
 					   $pdo = Database::connect();
+
+					   $sql2 = 'SELECT * FROM reportes';
+
+					   foreach ($pdo->query($sql2) as $row2) {
+						   		$explanadasUsadas[$numExplanadas] = $row2['explanada']; 
+						   		$numExplanadas = $numExplanadas+1;
+					   }
+
 					   $sql = 'SELECT * FROM explanadas';
 	 				   foreach ($pdo->query($sql) as $row) {
 						   		echo '<tr>';							   	
     							   	echo '<td>'. $row['id'] . '</td>';
     							   	echo '<td>'. $row['nombre'] . '</td>';
     							   	echo '<td>'. $row['maximo'] . '</td>';
-                                    echo '<td width=250 style="text-align:center;">';
-    							   	/**echo '<a class="btn" href="readTubo.php?id='.$row['id'].'">Detalles</a>';
-    							   	echo '&nbsp;';
-    							   	echo '<a class="btn btn-success" href="updateTubo.php?id='.$row['id'].'">Actualizar</a>';
-    							   	echo '&nbsp;';**/
-    							   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Eliminar</a>';
+    							   	echo '<td width=250 style="text-align:center;">';
+
+    							   	if (!in_array($row['id'], $explanadasUsadas)) {					   		
+    							   		echo '<a class="btn btn-danger" href="delete.php?id='.$row['id'].'">Eliminar</a>';
+    							   	}else{
+    							   		echo '<a class="btn btn-danger" disabled="disabled" href="delete.php?id='.$row['id'].'">Eliminar</a>';	   		
+    							   	}
     							   	echo '</td>';
+    							   	
 							   	echo '</tr>';
 					   }
 					   Database::disconnect();
 					  ?>
+
+
+
 				      </tbody>
 	            </table>
     	</div>
