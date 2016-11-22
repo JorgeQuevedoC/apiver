@@ -73,7 +73,6 @@
 				<div class="navbar-header"> 
 					<div class="navbar-brand pull-left">
 						<a href="index.php"><img src="Img/logo.png" alt="Tenaris Tamsa "></a>
-						<a href="index.php"><img src="Img/apiverLogo.png" alt="Apiver"></a>
 					</div> 
 					<div class="navbar-brand pull-left">
 						
