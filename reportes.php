@@ -13,20 +13,44 @@
             $explanada =array();
             $contadorQ = 0;
             $contadorP=0;
+            $bandera = 0;
 
             
               $pdo = Database::connect();
               $sql = 'SELECT reportes.cantidad, reportes.fecha, reportes.proceso, tubos.diametro, explanadas.nombre FROM reportes INNER JOIN tubos ON reportes.diametro=tubos.diametro INNER JOIN explanadas ON reportes.explanada=explanadas.id ORDER BY reportes.fecha';
               
               foreach ($pdo->query($sql) as $row) {
-		  		$diametro[$contadorQ]=$row['diametro'];
-                $cantidad[$contadorQ]=$row['cantidad'];
-                $fecha[$contadorQ]=$row['fecha'];     
-                $proceso[$contadorQ]=$row['proceso'];
-                $explanada[$contadorQ]=$row['nombre']; 
-
-                $contadorQ=$contadorQ+1;
-              }
+              	if(in_array($row['nombre'], $explanada) && in_array($row['diametro'], $diametro) && $contadorQ != 0){
+              		for($i = 0; $i < $contadorQ; $i=$i+1){
+              			if($diametro[$i] === $row['diametro'] && $explanada[$i] === $row['nombre']){
+              				if($row['proceso'] === 'entrada'){
+              					$cantidad[$i] = $cantidad[$i] + $row['cantidad'];
+              				}
+              				else{
+              					$cantidad[$i] = $cantidad[$i] - $row['cantidad'];
+              				}
+              				$bandera = 1;
+              				break;
+              			}
+              		}
+              		if($bandera != 1){
+              			$diametro[$contadorQ]=$row['diametro'];
+			            $cantidad[$contadorQ]=$row['cantidad'];
+			            $fecha[$contadorQ]=$row['fecha'];     
+			            $proceso[$contadorQ]=$row['proceso'];
+			            $explanada[$contadorQ]=$row['nombre']; 
+						$contadorQ=$contadorQ+1;
+              		}
+              	}
+              	else{
+              		$diametro[$contadorQ]=$row['diametro'];
+		            $cantidad[$contadorQ]=$row['cantidad'];
+		            $fecha[$contadorQ]=$row['fecha'];     
+		            $proceso[$contadorQ]=$row['proceso'];
+		            $explanada[$contadorQ]=$row['nombre']; 
+					$contadorQ=$contadorQ+1;
+              	}
+            }
 
               Database::disconnect();
 //--------------------____------------------------------------------------------------------------------------
@@ -122,13 +146,11 @@
 
 	<section id="main-content">
 		<div class="container">
-			<table style="width:95%">
+			<table style="width:95%" class="table table-striped">
 								  <tr bgcolor="#E6E6FA">
-								    <td>Diámetro</td>
-								    <td>Cantidad</td>
-								    <td>Fecha</td>
-								    <td>Proceso</td>
-								    <td>Explanada</td>
+								    <th>Diámetro</th>
+								    <th>Cantidad</th>
+								    <th>Explanada</th>
 								  </tr>
 					<?php 
 						foreach ($diametro as $valor) {
@@ -136,8 +158,6 @@
 								  <tr>
 								    <td><?php echo ($diametro[$contadorP]) ?></td>
 								    <td><?php echo ($cantidad[$contadorP]) ?></td>
-								    <td><?php echo ($fecha[$contadorP]) ?></td>		
-								    <td><?php echo ($proceso[$contadorP]) ?></td>
 								    <td><?php echo ($explanada[$contadorP]) ?></td>							   
 								  </tr>		
 								  
