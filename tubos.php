@@ -130,7 +130,7 @@
     							   	echo '<td>'. $row['diametro'] . '</td>';
 
 	                                echo '<td width=250 style="text-align:center;">';
-    							   	if(!in_array($row['id'], $diametrosExistentes)){
+    							   	if(!in_array($row['diametro'], $diametrosExistentes)){
 	    							   	echo '<a class="btn btn-danger" href="deleteTubo.php?id='.$row['id'].'">Eliminar</a>';  	
 	    							}
 	    							else{
