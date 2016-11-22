@@ -17,7 +17,7 @@
 
             
               $pdo = Database::connect();
-              $sql = 'SELECT reportes.cantidad, reportes.fecha, reportes.proceso, tubos.diametro, explanadas.nombre FROM reportes INNER JOIN tubos ON reportes.diametro=tubos.id INNER JOIN explanadas ON reportes.explanada=explanadas.id ORDER BY reportes.fecha';
+              $sql = 'SELECT reportes.cantidad, reportes.fecha, reportes.proceso, tubos.diametro, explanadas.nombre FROM reportes INNER JOIN tubos ON reportes.diametro=tubos.diametro INNER JOIN explanadas ON reportes.explanada=explanadas.id ORDER BY reportes.fecha';
               
               foreach ($pdo->query($sql) as $row) {
               	if(in_array($row['nombre'], $explanada) && in_array($row['diametro'], $diametro) && $contadorQ != 0){
