@@ -11,6 +11,18 @@
             $fecha= array();
             $proceso= array();
             $explanada =array();
+
+            $overflow = array();
+            $underflow = array();
+            $fechaOverflow = array();
+            $fechaUderflow = array();
+            $contadorO=0;
+            $contadorO2=0;
+
+            $contadorU=0;
+            $contadorU2=0;
+
+
             $contadorQ = 0;
             $contadorP=0;
             $bandera = 0;
@@ -51,6 +63,24 @@
 					$contadorQ=$contadorQ+1;
               	}
             }
+
+            $sqlOverflow = 'SELECT overflow.fecha, explanadas.nombre FROM overflow INNER JOIN explanadas ON overflow.explanada=explanadas.id ORDER BY overflow.fecha';
+              
+            foreach ($pdo->query($sqlOverflow) as $row) {
+            	$overflow[$contadorO]=$row['nombre'];
+		        $fechaOverflow[$contadorO]=$row['fecha'];     
+				$contadorO=$contadorO+1;    	
+            }
+
+            $sqlUnderflow = 'SELECT underflow.fecha, explanadas.nombre FROM underflow INNER JOIN explanadas ON underflow.explanada=explanadas.id ORDER BY underflow.fecha';
+              
+            foreach ($pdo->query($sqlUnderflow) as $row) {
+            	$underflow[$contadorU]=$row['nombre'];
+		        $fechaUderflow[$contadorU]=$row['fecha'];     
+				$contadorU=$contadorU+1;    	
+            }
+
+
 
               Database::disconnect();
 //--------------------____------------------------------------------------------------------------------------
@@ -146,6 +176,7 @@
 
 	<section id="main-content">
 		<div class="container">
+			<h1>Existencia</h1>
 			<table style="width:95%" class="table table-striped">
 								  <tr bgcolor="#E6E6FA">
 								    <th>Diámetro</th>
@@ -167,68 +198,67 @@
 						}
 					?>
 			</table> 
-			<fieldset>
-    			<label for="Evento">Selecciona el tipo de búsqueda: </label>
-				    <select name="evento" id="evento">
-				     	<option>Diámetro</option>
-				     	<option>Cantidad de Tubos</option>
-				     	<option>Fecha</option>
-				     	<option>Explanada</option>
-				    </select>
-			</fieldset>
 
-			<div id="bHolder">		
-				<input type="button" id="submit" value="Iniciar Búsqueda"/>
-			</div>
-
-			<fieldset id="diam" style="display: none">
-				<script type='text/javascript'>
-					getDiametro();
-				</script>
-    			<label for="Evento">Selecciona el Tamaño (en cm.)</label>
-			    <select name="diametro" id="diametro">
-
-			    </select>
-			</fieldset>
-
-			<div id="bHolderDiam" style="display: none">
-				<input type='button' id='submitDiam' value='Buscar Número de Tubos'/>
-			</div>
-
-			<div class="form-group" style="display: none; text-align: center;" id="fecha">
-			    
-			    <fieldset id="diam" style="display: inline !important;">
-					<script type='text/javascript'>
-						getFecha();
-					</script>
-	    			<label for="Evento">De: </label>
-				    <select name="f1" id="f1">
-
-				    </select>
-				</fieldset>
-
-			    <fieldset id="diam" style="display: inline !important;">
-	    			<label for="Evento">Hasta: </label>
-				    <select name="f2" id="f2">
-
-				    </select>
-				</fieldset>
-
-			</div>
-
-			<div id="bHolderFecha" style="display: none">
-				<input type='button' id='submitFecha' value='Buscar por Fecha'/>
-			</div>
 
 			<div id="tabla"></div>
 
 		</div>
+
+		<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h3>Excedentes</h3>
+				<table style="width:95%" class="table table-striped">
+					<tr bgcolor="#E6E6FA">
+						<th>Explanada</th>
+						<th>Fecha</th>
+					</tr>
+					<?php 
+						foreach ($overflow as $valor) {
+					?>
+								  <tr>
+								    <td><?php echo ($overflow[$contadorO2]) ?></td>
+								    <td><?php echo ($fechaOverflow[$contadorO2]) ?></td>						   
+								  </tr>		
+								  
+								
+					<?php	
+						$contadorO2 = $contadorO2+1;						
+						}
+					?>
+				</table> 
+			</div>
+	  		<div class="col-md-6">
+	  			<h3>Decrecientes</h3>
+	  			<table style="width:95%" class="table table-striped">
+					<tr bgcolor="#E6E6FA">
+						<th>Explanada</th>
+						<th>Fecha</th>
+					</tr>
+					<?php 
+						foreach ($underflow as $valor) {
+					?>
+								  <tr>
+								    <td><?php echo ($underflow[$contadorU2]) ?></td>
+								    <td><?php echo ($fechaUderflow[$contadorU2]) ?></td>						   
+								  </tr>		
+								  
+								
+					<?php	
+						$contadorU2 = $contadorU2+1;						
+						}
+					?>
+				</table>
+	  		</div>
+		</div>
+		</div>
+
 	</section>
 
 	<footer class="pannel-footer">
 		<div class="container" id="bottom">
 		        <section id="datos" class="text-center">
-		          	<span>Copyright &copy; 2016 Tenaris Tamsa</span>
+		          	<span>Copyright &copy; 2016 Tenaris Tamsa & APIVER</span>
 		        </section>
 		    <div class="row">
 		        <section class="blue col-xs-4">
@@ -244,20 +274,5 @@
 	    </div>
 	</footer>
 
-	<script>
-  		$('#submit').click(function(){
-			HazQuery();
-		});
-	</script>
-	<script>
-		$('#submitDiam').click(function(){
-			BuscaDiametro();
-		})
-	</script>
-	<script>
-		$('#submitFecha').click(function(){
-			BuscaFecha();
-		})
-	</script>
 	</body>
 </html>

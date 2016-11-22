@@ -187,7 +187,7 @@
 	    	<footer class="pannel-footer">
 		<div class="container" id="bottom">
 		        <section id="datos" class="text-center">
-		          	<span>Copyright &copy; 2016 Tenaris Tamsa</span>
+		          	<span>Copyright &copy; 2016 Tenaris Tamsa & APIVER</span>
 		        </section>
 		    <div class="row">
 		        <section class="blue col-xs-4">
